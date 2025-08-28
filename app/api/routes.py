@@ -16,7 +16,8 @@ async def summarize_pdf(
 
     try:
         pdf_text = extract_text_from_pdf(await file.read())
-        summary = summarize_text(pdf_text, percentage)
+        #summary = pdf_text
+        summary = summarize_text(pdf_text)
         return {"summary": summary}
     except Exception as e:
         return {"error": str(e)}
