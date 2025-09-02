@@ -1,10 +1,10 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import List, Optional
 from datetime import datetime
 import uuid
 
 class ChunkModel(BaseModel):
-    chunk_id: str = str(uuid.uuid4())
+    chunk_id: str = Field(default_factory=lambda: str(uuid.uuid4())) 
     pdf_id: str
     file_name: Optional[str] = None
     page_number: Optional[int] = None
@@ -12,5 +12,5 @@ class ChunkModel(BaseModel):
     chunk_text: str
     embedding: Optional[List[float]] = None
     source_url: Optional[str] = None
-    created_at: datetime = datetime.now(tz=None)
-    tags: Optional[List[str]] = []
+    created_at: datetime = Field(default_factory=datetime.now(tz=None))
+    tags: list[str] = Field(default_factory=list)
