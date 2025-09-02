@@ -20,7 +20,7 @@ def chunk_text(text: str, max_tokens: int = 1000, model: str = "gpt-4") -> List[
 
     # Absätze erkennen
     sections = re.split(r'\n\s*\n', text)
-    chunks = []
+    chunks: list[str] = []
     current_chunk = []
     current_tokens = 0
 
