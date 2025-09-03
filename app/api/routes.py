@@ -1,26 +1,53 @@
-from fastapi import APIRouter, File, UploadFile, Form
-from app.services.ai_service import summarize_text
-from app.services.embedding_service import create_embeddings_for_chunks
-from app.services.pdf_service import extract_text_from_pdf
-from app.services.chunk_service import chunk_text
+from fastapi import APIRouter, File, UploadFile
+from app.services.pipeline_service import process_pdf, summarize_pdf
+import uuid
+
+from app.services.storage_service import get_all_pdf_ids
+
+
 
 router = APIRouter()
 
-@router.post("/summarize")
-async def summarize_pdf(
+@router.post("/pdf_upload")
+async def upload_pdf_to_vector(
     file : UploadFile = File(...),
 ):
     """
-    Nimmt eine PDF-Datei entgegen, extrahiert Text und 
-    gibt eine zusammengefasste Version zurück.
+    Nimmt eine PDF-Datei entgegen, extrahiert Text und Speichert diesen in DB.
     """
 
     try:
-        pdf_text = extract_text_from_pdf(await file.read())
-        chunk_list = chunk_text(pdf_text)
-        embeddings = create_embeddings_for_chunks(chunk_list)
+        file_bytes = await file.read()
+        pdf_id = str(uuid.uuid4())
+        chunks = await process_pdf(file_bytes, pdf_id, file.filename)
+        return {"chunks_stored": len(chunks)}
+    
+    except Exception as e:
+        return {"error": str(e)}
+    
 
-        #summary = summarize_text(pdf_text)
-        return {"embeddings": embeddings}
+@router.get("/summarize")
+async def summarize_document(pdf_id: str):
+    """
+    Erstellt eine Gesamtzusammenfassung einer PDF anhand der PDF-ID
+    """
+    try:
+        summary = await summarize_pdf(pdf_id)
+        
+        return {"AI-Summary": summary}
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@router.get("/pdf_ids")
+async def get_pdf_ids():
+    """
+    Gibt eine Liste aller PDF-IDs zurück
+    """
+    try:
+        pdf_ids = get_all_pdf_ids()
+        return {"Alle IDs": pdf_ids}
+    
     except Exception as e:
         return {"error": str(e)}

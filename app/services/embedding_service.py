@@ -30,3 +30,4 @@ def create_embeddings_for_chunks(chunks: list[str]) -> list[list[float]]:
         embedding = create_embedding(chunk)
         embeddings.append(embedding)
     return embeddings
+
