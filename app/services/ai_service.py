@@ -9,13 +9,9 @@ client = ChatCompletionsClient(
     credential=AzureKeyCredential(settings.azure_openai_api_key)
 )
 
-userMessageContent_fulltext = """
-
-"""
-
-def summarize_text(text: str, max_tokens: int = 20000) -> str:
+async def summarize_text(text: str, max_tokens: int = 20000) -> str:
     """
-    Nimmt langen Text und gibt eine Analyse/Struktur der PDF zurück.
+    Nimmt Text und gibt eine Analyse/Struktur der PDF zurück.
     """
     response = client.complete(
         messages=[
@@ -45,3 +41,11 @@ Document content:
         model=settings.azure_deployment_name
     )
     return response.choices[0].message.content.strip()
+
+
+async def combine_summaries(single_simmaries: list[str]) -> str:
+     """Kombiniert Chunk-Zusammenfassungen zu einer Gesamtübersicht."""
+     all_summaries = "\n".join(single_simmaries)
+
+     response = await summarize_text(all_summaries)
+     return response

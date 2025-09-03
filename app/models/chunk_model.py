@@ -12,5 +12,5 @@ class ChunkModel(BaseModel):
     chunk_text: str
     embedding: Optional[List[float]] = None
     source_url: Optional[str] = None
-    created_at: datetime = Field(default_factory=datetime.now(tz=None))
+    created_at: datetime = Field(default_factory=datetime.now)
     tags: list[str] = Field(default_factory=list)
