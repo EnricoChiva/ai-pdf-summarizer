@@ -1,4 +1,4 @@
-from app.services.ai_service import combine_summaries, summarize_text
+from app.services.ai_service import combine_summaries, pre_summarize_chunks
 from app.services.pdf_service import extract_text_from_pdf
 from app.services.chunk_service import chunk_text
 from app.services.embedding_service import create_embeddings_for_chunks
@@ -37,9 +37,8 @@ async def summarize_pdf(pdf_id) -> str:
     chunks = [doc["chunk_text"] for doc in docs]
 
     # Summary pro Chunk erstellen
-    chunk_summaries = await asyncio.gather(*(summarize_text(c) for c in chunks))
+    chunk_summaries = await asyncio.gather(*(pre_summarize_chunks(c) for c in chunks))
 
     # Gesamtsummary
-
     final_summary = await combine_summaries(chunk_summaries)
     return final_summary
