@@ -17,18 +17,18 @@ azure_client = AzureOpenAI(
      api_key=settings.azure_openai_api_key
 )
 
-async def pre_summarize_chunks(text: str, max_tokens: int = 10000) -> str:
+async def pre_summarize_chunks(text: str, max_tokens: int = 1000) -> str:
     """
     Nimmt Text und gibt eine Analyse/Struktur der PDF zurück.
     """
     response = client.complete(
         messages=[
             SystemMessage(content="""
-You are an expert document analyst and knowledge extractor.
-Your goal is to fully analyze long PDF documents.
-Focus on understanding the entire content and extracting all important ideas.
-Organize the extracted information into meaningful chapters or sections.
-Ensure that the output is clear, professional, and factual.
+You are a concise and accurate document analyst. 
+Always produce verifiable, factual summaries. 
+When summarizing, keep to the limits requested and include a 'source' field that references the chunk_id or page_number provided in the user message.
+Avoid adding new claims not present in the text. If unsure, say "uncertain" and mark it.
+
 """),
             UserMessage(content=f"""
 Analyze the following document thoroughly. 
@@ -51,7 +51,7 @@ Document content:
     return response.choices[0].message.content.strip()
 
 
-async def summarize_text_o3_mini(text: str, max_tokens: int = 1000) -> str:
+async def summarize_text_o3_mini(text: str, max_tokens: int = 10000) -> str:
     """
     Nimmt Text und gibt eine Analyse/Struktur der PDF zurück.
     """
