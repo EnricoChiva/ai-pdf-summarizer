@@ -16,10 +16,19 @@ class Settings(BaseSettings):
     debug: bool = Field(True, description="Debug-Mode aktivieren/deaktivieren")
 
     # Azure AI Foundry Settings 
-    azure_openai_endpoint: str = Field(..., description="Endpoint für Azure OpenAI")
     azure_openai_api_key: str = Field(..., description="API-Key für Azure OpenAI")
-    azure_openai_model: str = Field(..., description="Name des von Azure bereitgestellten KI-Modells")
-    azure_deployment_name: str = Field(..., description="Name der deployten Ressource in Foundry")
+
+    # Azure AI Foundry o3-Settings
+    azure_openai_endpoint_o3: str = Field(..., description="Endpoint für Azure OpenAI")
+    azure_openai_model_o3: str = Field(..., description="Name des von Azure bereitgestellten KI-Modells")
+    azure_deployment_name_o3: str = Field(..., description="Name der deployten Ressource in Foundry")
+    api_version_o3: str = Field(..., description="API-Version")
+
+    # Azure AI Foundry Maverick-Settings
+    azure_openai_endpoint_maverick: str = Field(..., description="Endpoint für Azure OpenAI")
+    azure_openai_model_maverick: str = Field(..., description="Name des von Azure bereitgestellten KI-Modells")
+    azure_deployment_name_maverick: str = Field(..., description="Name der deployten Ressource in Foundry")
+    api_version_maverick: str = Field(..., description="API-Version")
 
     # Azure Embedding Settings 
     azure_openai_embedding_endpoint: str = Field(..., description="Endpunkt der Azure Embedding Ressource")
