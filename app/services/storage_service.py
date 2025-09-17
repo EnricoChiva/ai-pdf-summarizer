@@ -61,14 +61,25 @@ class StorageService:
              logger.exception("Fehler beim Abrufen der PDF-IDs")
              raise
 
-    async def delete_all_pdfs(self) -> None:
-        """Löscht alle PDFs aus Azure Search.""" 
+    async def delete_pdf_by_id(self, input_pdf_id: str) -> None:
+        """Löscht PDF anhand der pdf_id aus Azure Search."""
         try:
-            pdf_ids = await self.get_all_pdf_ids()
-            docs_to_delete = [{"pdf_id": pdf_id} for pdf_id in pdf_ids]
-            if docs_to_delete:
-                await self.client.delete_documents(documents=docs_to_delete)
-                logger.info(f"Deleted {len(docs_to_delete)} PDFs from Azure Search")
+            results = await self.client.search(
+            search_text="*",
+            filter=f"pdf_id eq '{input_pdf_id}'",
+            select="chunk_id"
+        )
+            docs = [doc async for doc in results]
+
+            if not docs:
+                logger.info(f"No chunks found for PDF {input_pdf_id}")
+                return
+        
+            chunk_ids = [doc["chunk_id"] for doc in docs if "chunk_id" in doc]
+
+            await self.client.delete_documents(documents=[{"chunk_id": cid} for cid in chunk_ids])
+            logger.info(f"Deleted {len(chunk_ids)} chunks for PDF {input_pdf_id}")
+
         except AzureError:
-             logger.exception("Fehler beim löschen der PDFs")
-             raise
+            logger.exception(f"Fehler beim Löschen der PDF: {input_pdf_id}")
+            raise

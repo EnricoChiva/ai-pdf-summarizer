@@ -60,3 +60,18 @@ async def get_pdf_ids(
         return {"Alle IDs": pdf_ids}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    
+
+@router.delete("/delete_pdf_by_id")
+async def delete_pdf(
+    pdf_id: str,
+    storage: StorageService = Depends(get_storage_service)
+):
+    """
+    Löscht eine PDF anhand ihrer ID
+    """
+    try:
+        await storage.delete_pdf_by_id(pdf_id)
+        return {"message": f"PDF {pdf_id} wurde geklöscht."}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
