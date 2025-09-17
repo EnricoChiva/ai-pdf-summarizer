@@ -6,7 +6,7 @@ app = FastAPI(title=settings.app_name, debug=settings.debug)
 
 app.include_router(api_router)
 
-@app.get("/")
+@app.get("/", tags=["Health"])
 async def root():
     return {
         "message": f"{settings.app_name} läuft!",
