@@ -137,7 +137,7 @@ cd ai-pdf-summarizer
 
 python -m venv .venv
 source .venv/bin/activate  # macOS / Linux
-# oder
+#### oder
 .venv\Scripts\activate     # Windows
 
 
