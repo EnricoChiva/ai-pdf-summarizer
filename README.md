@@ -5,8 +5,6 @@ Ideal für lange Berichte, wissenschaftliche Texte oder Geschäftsunterlagen.
 
 ---
 
-
-
 ## 🚀 Projektübersicht
 
 Dieses Projekt zerlegt PDF-Dokumente in sinnvolle Textabschnitte (*Chunks*), analysiert sie mithilfe von **Large Language Models (LLMs)** und erstellt daraus eine prägnante, strukturierte Gesamtzusammenfassung.
@@ -16,10 +14,8 @@ Die Anwendung zeigt, wie man:
 - semantische Suche und Embeddings einsetzt,
 - mehrere LLMs in einer **Map-Reduce-ähnlichen Pipeline** kombiniert,
 - und Azure OpenAI mit FastAPI integriert.
-
 ---
-
-
+<br>
 
 ## 🧩 Architektur
 
@@ -38,8 +34,7 @@ PDF Upload → Chunking → Embedding → Azure AI Search → LLM Summaries → 
 | `api/routes.py` | REST API (FastAPI) für Upload & Zusammenfassung |
 
 ---
-
-
+<br>
 
 ## 🧠 Technischer Ablauf
 
@@ -62,8 +57,7 @@ PDF Upload → Chunking → Embedding → Azure AI Search → LLM Summaries → 
    Das Frontend zeigt die strukturierte Zusammenfassung.
 
 ---
-
-
+<br>
 
 ## 🧰 Tech-Stack
 
@@ -78,9 +72,7 @@ PDF Upload → Chunking → Embedding → Azure AI Search → LLM Summaries → 
 | **Uvicorn** | Entwicklungsserver |
 
 ---
-
-
-
+<br>
 
 ## 🧠 Features
 
@@ -99,8 +91,7 @@ Konfigurierbar per .env
 Erweiterbar für Q&A / RAG / Semantische Suche
 
 ---
-
-
+<br>
 
 
 ## 💡 Lernziele & Fokus
@@ -118,7 +109,7 @@ Asynchrones Python-Design (async/await)
 Saubere Service-Architektur
 
 ---
-
+<br>
 
 
 ## 🧩 Mögliche Erweiterungen
@@ -132,7 +123,7 @@ Saubere Service-Architektur
 🧾 Automatische Report-Generierung (Markdown / PDF)
 
 ---
-
+<br>
 
 
 ## ⚙️ Setup & Installation
