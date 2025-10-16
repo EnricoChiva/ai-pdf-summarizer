@@ -2,9 +2,9 @@
 
 Ein intelligenter PDF-Analyzer, der große Dokumente automatisch zusammenfasst – unterstützt durch **Azure OpenAI**, **Azure AI Search (VectorDB)** und **Python FastAPI**.  
 Ideal für lange Berichte, wissenschaftliche Texte oder Geschäftsunterlagen.
-
 ---
 <br>
+
 
 ## 🚀 Projektübersicht
 
