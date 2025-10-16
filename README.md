@@ -4,6 +4,7 @@ Ein intelligenter PDF-Analyzer, der große Dokumente automatisch zusammenfasst �
 Ideal für lange Berichte, wissenschaftliche Texte oder Geschäftsunterlagen.
 
 ---
+<br>
 
 ## 🚀 Projektübersicht
 
