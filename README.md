@@ -141,11 +141,11 @@ pip install -r requirements.txt
 ### 4. .env.dev konfigurieren
 
 
-# Azure OpenAI
+#### Azure OpenAI
 AZURE_OPENAI_ENDPOINT=https://<dein-endpunkt>.openai.azure.com/
 AZURE_OPENAI_API_KEY=<dein-api-key>
 
-# Modelle
+#### Modelle
 AZURE_OPENAI_MODEL_o3=o3-mini
 AZURE_DEPLOYMENT_NAME_o3=o3-mini
 API_VERSION_O3=2024-12-01-preview
@@ -154,7 +154,7 @@ AZURE_OPENAI_MODEL_MAVERICK=Llama-4-Maverick-17B-128E-Instruct-FP8
 AZURE_DEPLOYMENT_NAME_MAVERICK=Llama-4-Maverick-Alpha
 API_VERSION_MAVERICK=2024-05-01-preview
 
-# Azure Search
+#### Azure Search
 SEARCH_API_ENDPOINT=https://<deine-search-instance>.search.windows.net
 SEARCH_API_KEY=<dein-key>
 SEARCH_API_INDEX=pdf-chunks
